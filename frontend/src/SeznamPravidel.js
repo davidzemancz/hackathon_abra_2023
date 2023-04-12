@@ -59,14 +59,9 @@ function SeznamPravidel(props)
         const columns = [
           { field: 'id', headerName: 'ID', width: 90 },
           {
-            field: 'Četnost',
-            headerName: 'Četnost',
-            width: 150,
-          },
-          {
             field: 'nazev',
             headerName: 'Jméno',
-            width: 200,
+            width: 250,
           },
           {
             field: 'Zobrazit',
@@ -116,7 +111,7 @@ function SeznamPravidel(props)
             
               <Container sx={{
                         textAlign: 'center',
-                        width: 650
+                        width: 550
                     }}>
                       <DataGrid autoHeight
                 rows={rows}

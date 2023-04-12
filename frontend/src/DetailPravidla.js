@@ -122,7 +122,7 @@ export function GridPravidel(props){
 
     const columns = [
         { field: 'id', headerName: '',width: 80},
-        { field: 'stredisko', headerName: 'Středisko', width: 120,},
+        { field: 'stredisko', headerName: 'Středisko', width: 120,editable: true,},
         {
           field: 'castka',
           headerName: 'Částka',
@@ -137,8 +137,8 @@ export function GridPravidel(props){
             width: 100,
             editable: true,
         },
-        { field: 'zbytek', headerName: 'Zbytek',width: 80, renderCell: renderCheckbox, disableClickEventBubbling: true,},
-        { field: 'delete', headerName: '', width: 100, renderCell: renderDeleteButton, disableClickEventBubbling: true,}
+        { field: 'zbytek', headerName: 'Zbytek',width: 80, renderCell: renderCheckbox, disableClickEventBubbling: true, disableColumnMenu: true, sortable: false,},
+        { field: 'delete', headerName: '', width: 100, renderCell: renderDeleteButton, disableClickEventBubbling: true, disableColumnMenu: true, sortable: false,}
       ];
 
            
