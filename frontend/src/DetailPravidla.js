@@ -6,35 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from '@mui/material/Paper';
 import AddIcon from '@mui/icons-material/Add';
 
-const renderDeleteButton = (params) => {
-    return (
-        <strong>
-            {/* <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    style={{ marginLeft: 16 }}
-                    onClick={() => {
-                        // <Link to='/pravidlo' > some stuff </Link>
-                    }}
-                >
-                    Delete
-                </Button> */}
-                <IconButton aria-label="delete" 
-                            onClick={() => {
-                        // <Link to='/pravidlo' > some stuff </Link>
-                    }}>
-                    <DeleteIcon />
-                </IconButton>
-        </strong>
-    )
-}
 
-const renderCheckbox = (params) => {
-    return(
-        <Checkbox />
-    )
-}
 
 function DetailPravidla(){
     return (
@@ -88,6 +60,34 @@ function DetailPravidla(){
 }
 export function GridPravidel(){
 
+    const renderDeleteButton = (params) => {
+        return (
+            <strong>
+                {/* <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        style={{ marginLeft: 16 }}
+                        onClick={() => {
+                            // <Link to='/pravidlo' > some stuff </Link>
+                        }}
+                    >
+                        Delete
+                    </Button> */}
+                    <IconButton aria-label="delete" 
+                                onClick={() => smazPolozku(params.id)}>
+                        <DeleteIcon />
+                    </IconButton>
+            </strong>
+        )
+    }
+    
+    const renderCheckbox = (params) => {
+        return(
+            <Checkbox />
+        )
+    }
+
     const columns = [
         { field: 'id', headerName: '',width: 80},
         { field: 'stredisko', headerName: 'Středisko', width: 120,},
@@ -119,6 +119,8 @@ export function GridPravidel(){
         },
         ]);
 
+        
+
     function novyRadek() {
         const novyRadek = {
             id: rows.length > 0 ? rows[rows.length - 1].id + 1 : 1,
@@ -127,6 +129,11 @@ export function GridPravidel(){
             procenta: 0,
         };
         setRows(rows => [...rows, novyRadek])
+    }
+
+    function smazPolozku(id) {
+        setRows(rows.filter(row => row.id != id))
+        //alert("Mazu " + id)
     }
       
     return (
