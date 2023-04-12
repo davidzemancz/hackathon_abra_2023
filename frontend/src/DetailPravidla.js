@@ -122,7 +122,7 @@ export function GridPravidel(props){
 
     const columns = [
         { field: 'id', headerName: '',width: 80},
-        { field: 'stredisko', headerName: 'Středisko', width: 120,},
+        { field: 'stredisko', headerName: 'Středisko', width: 120,editable: true,},
         {
           field: 'castka',
           headerName: 'Částka',
