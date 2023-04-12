@@ -1,3 +1,43 @@
+# Formuláře
+
+* Komponenta pro zobrazení faktury a ruční rozúčtování
+  * Sem to uživatele přesměruje z ABRA Flexi
+  * Podle objectId se z REST API načte faktura
+  * Levý sloupec
+    * Komponenta s položkami faktury a v ní Form
+      * Dodavatel (text)
+      * Popis (text)
+      * Celková cena (číslo)
+    * Komponenta se seznamem pro rozúčotávní na střediska (DataGrid)
+      * Sloupce 
+        * Středisko (výběr se seznamu)
+          * Načte se z REST API 
+        * Fixní částka (číslo)
+        * Procentní podíl (číslo)
+        * Zbytek (checkbox)
+  * Pravý sloupec
+    * Komponenta s tabulka sad pravidel
+      * U sady tlačítko zobrazit (přesměruje na detail pravidla) a použít
+
+* Komponenta pro zobrazení (vytvoření) pravidla
+  * Formuláře
+    * Název
+  * DataGrid
+    * Středisko (výběr se seznamu)
+      * Načte se z REST API 
+    * Fixní částka (číslo)
+    * Procentní podíl (číslo)
+    * Zbytek (checkbox)
+
+* Komponenta pro seznam sad pravidel (DataGrid)
+  * Sloupce
+    * Název
+    * Četnost
+    * Zkráceně pravidla pro střediska
+    * Tlačítko zobrazit, odstranit
+  * Tlačítko pro nové pravidlo
+* 
+
 # Datové struktury
 
 ## Pravidlo
@@ -34,3 +74,5 @@
       3. Podle ručního rozúčtování se chytře (wtf jak) vytvoří pravidlo samo!!!
       4. A nabídne se editace sady s návrhy pravidel
       5. Nová sada se uloží pomocí RESP API
+
+
