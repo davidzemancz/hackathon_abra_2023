@@ -3,6 +3,7 @@ import { DataGrid} from '@mui/x-data-grid';
 import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Paper from '@mui/material/Paper';
 
 const renderDeleteButton = (params) => {
     return (
@@ -41,24 +42,29 @@ function DetailPravidla(){
             '& .MuiTextField-root': { m: 1, width: '25ch' },
         }}>
             <h3> Editace sady pravidel </h3>
-            <FormControl>
-            <div>
-                <TextField required id="rule_name" label="Název"/>
-                <TextField id="rule_payer" label="Zadavatel"/>
-                <TextField id="rule_description" label="Popis"/>
-                
-                <TextField id="rule_upperBound" label="Cena do"/>
-                <TextField id="rule_lowerBound" label="Cena od"/>
-            </div>
+            <Paper elevation={2}
+            sx={{
+                width: 300,
+                color: 'success.main',
+              }}>
+                <FormControl>
+                    <div>
+                        <TextField required id="rule_name" label="Název"/>
+                        <TextField id="rule_payer" label="Zadavatel"/>
+                        <TextField id="rule_description" label="Popis"/>
+                        <TextField id="rule_upperBound" label="Cena do"/>
+                        <TextField id="rule_lowerBound" label="Cena od"/>
+                    </div>
+                </FormControl>
+            </Paper>
             
-            </FormControl>
 
             <GridPravidel/>
 
         </Box>
     );
 }
-function GridPravidel(){
+export function GridPravidel(){
 
     const columns = [
         { field: 'id', headerName: '',width: 80},
