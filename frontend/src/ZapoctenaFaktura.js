@@ -6,36 +6,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from '@mui/material/Paper';
 import AddIcon from '@mui/icons-material/Add';
 
-const renderDeleteButton = (params) => {
-    return (
-        <strong>
-            {/* <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    style={{ marginLeft: 16 }}
-                    onClick={() => {
-                        // <Link to='/pravidlo' > some stuff </Link>
-                    }}
-                >
-                    Delete
-                </Button> */}
-                <IconButton aria-label="delete" 
-                            onClick={() => {
-                        // <Link to='/pravidlo' > some stuff </Link>
-                    }}>
-                    <DeleteIcon />
-                </IconButton>
-        </strong>
-    )
-}
-
-const renderCheckbox = (params) => {
-    return(
-        <Checkbox />
-    )
-}
-
 export function ZapoctenaFaktura(props){
     console.log("THIS IS ROWS")
     console.log(props.rows)
