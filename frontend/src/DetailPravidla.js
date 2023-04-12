@@ -1,15 +1,24 @@
 import { Box, Button, Checkbox, Container, FormControl, TextField } from "@mui/material";
 import { DataGrid} from '@mui/x-data-grid';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from '@mui/material/Paper';
 import AddIcon from '@mui/icons-material/Add';
-
+import { Load } from "./SadyPravidelAPI"
+import { useParams } from "react-router-dom";
 
 
 function DetailPravidla(){
-    return (
+    const [sada, setSada] = useState(null)
+    let { id } = useParams();
+
+    useEffect(() => {
+        setSada(Load(id))
+    }, [])
+
+    if (sada === null) return (<p>Načítání...</p>)
+    else return (
         <Box component="form"
         sx={{
             '& .MuiTextField-root': { m: 1, width: '25ch'}, textAlign: 'center'
@@ -31,15 +40,15 @@ function DetailPravidla(){
                     }}>
                         <FormControl>
                             <div>
-                                <TextField required id="rule_name" label="Název"/>
+                                <TextField required id="rule_name" label="Název" onChange={(e) => setSada({...sada, nazev: e.target.value})}/>
                             </div>
                             <div>
-                                <TextField id="rule_payer" label="Zadavatel"/>
-                                <TextField id="rule_description" label="Popis"/>
+                                <TextField id="rule_payer" label="Dodavatel" onChange={(e) => setSada({...sada, dodavatel: e.target.value})}/>
+                                <TextField id="rule_description" label="Popis" onChange={(e) => setSada({...sada, popis: e.target.value})}/>
                             </div>
                             <div>
-                                <TextField id="rule_upperBound" label="Cena do"/>
-                                <TextField id="rule_lowerBound" label="Cena od"/>
+                                <TextField id="rule_upperBound" label="Cena do" onChange={(e) => setSada({...sada, cenaOd: e.target.value})}/>
+                                <TextField id="rule_lowerBound" label="Cena od" onChange={(e) => setSada({...sada, cenaDo: e.target.value})}/>
                             </div>
                         </FormControl>
                     </Paper>
@@ -50,7 +59,7 @@ function DetailPravidla(){
                         textAlign: 'center',
                         width: 800
                     }}>
-                <GridPravidel/>
+                <GridPravidel sada={sada} setSada={setSada}/>
 
             </Container>
             
@@ -58,7 +67,7 @@ function DetailPravidla(){
         </Box>
     );
 }
-export function GridPravidel(){
+export function GridPravidel(props){
 
     const renderDeleteButton = (params) => {
         return (
@@ -109,37 +118,27 @@ export function GridPravidel(){
         { field: 'delete', headerName: '', width: 100, renderCell: renderDeleteButton, disableClickEventBubbling: true,}
       ];
 
-    const [rows, setRows] = useState([
-        {
-            id: 1,
-            stredisko: 'C',
-            castka: 2500,
-            procenta: 20,
-            zbytek: true, 
-        },
-        ]);
-
-        
+           
 
     function novyRadek() {
         const novyRadek = {
-            id: rows.length > 0 ? rows[rows.length - 1].id + 1 : 1,
+            id: props.sada.pravidla.length > 0 ? props.sada.pravidla[props.sada.pravidla.length - 1].id + 1 : 1,
             stredisko: 'C',
             castka: 0,
             procenta: 0,
+            zbytek: false
         };
-        setRows(rows => [...rows, novyRadek])
+        props.setSada({...props.sada, pravidla: [...props.sada.pravidla, novyRadek]})
     }
 
     function smazPolozku(id) {
-        setRows(rows.filter(row => row.id != id))
-        //alert("Mazu " + id)
+        props.setSada({...props.sada, pravidla: props.sada.pravidla.filter(p => p.id != id)})
     }
       
     return (
         <div>
-            <Button sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained" onClick={() => novyRadek()} startIcon={<AddIcon />}> Nové pravidlo </Button>
-            <DataGrid columns={columns} rows={rows} autoHeight
+            <Button sx={{ m: 2 }} variant="contained" onClick={() => novyRadek()} startIcon={<AddIcon />}> Nové pravidlo </Button>
+            <DataGrid columns={columns} rows={props.sada.pravidla} autoHeight 
             sx={{
                 textAlign: 'center',
               }}/>
