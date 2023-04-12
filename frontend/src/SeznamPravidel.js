@@ -6,6 +6,9 @@ import { NavLink, redirect } from "react-router-dom";
 import {Link} from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 function SeznamPravidel(props)
@@ -31,15 +34,15 @@ function SeznamPravidel(props)
           console.log(params)
           return (
               <strong>
-                  <Button
-                          variant="contained"
-                          color="primary"
-                          size="small"
-                          style={{ marginLeft: 16 }}
+                  <IconButton aria-label="delete"
+                          // variant="contained"
+                          // color="primary"
+                          // size="small"
+                          // style={{ marginLeft: 16 }}
                           onClick={() => smazPolozku(params.id)}
                       >
-                          Delete
-                      </Button>
+                          <DeleteIcon />
+                      </IconButton>
               </strong>
           )
         }
@@ -48,14 +51,14 @@ function SeznamPravidel(props)
           return (
               <strong>
                   <NavLink to="pravidlo/0">
-                  <Button
-                          variant="contained"
-                          color="primary"
-                          size="small"
-                          style={{ marginLeft: 16 }}
+                  <IconButton aria-label="edit"
+                          // variant="contained"
+                          // color="primary"
+                          // size="small"
+                          // style={{ marginLeft: 16 }}
                       >
-                          Zobraz
-                      </Button>
+                        <EditIcon/>
+                      </IconButton>
                       </NavLink>
               </strong>
           )
@@ -77,18 +80,22 @@ function SeznamPravidel(props)
           },
           {
             field: 'Zobrazit',
-            headerName: 'Zobrazit',
-            width: 150,
+            headerName: '',
+            width: 80,
             renderCell: renderViewButton,
             disableClickEventBubbling: true,
+            sortable: false,
+            disableColumnMenu: true,
           },
           {
             field: 'Remove',
-            headerName: 'Smazat',
+            headerName: '',
             description: 'Smazat sadu',
-            width: 150,
+            width: 80,
             renderCell: renderDeleteButton,
             disableClickEventBubbling: true,
+            sortable: false,
+            disableColumnMenu: true,
           },
         ];
 
