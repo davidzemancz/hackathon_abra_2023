@@ -2,26 +2,26 @@ import * as React from 'react';
 import { Box } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
 import {Button} from '@mui/material';
-import { redirect } from "react-router-dom";
+import { NavLink, redirect } from "react-router-dom";
 import {Link} from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
 
   
-const renderDeleteButton = (params) => {
+function renderDeleteButton(params) {
+
     return (
         <strong>
+            <NavLink to="pravidlo/0">
             <Button
                     variant="contained"
                     color="primary"
                     size="small"
                     style={{ marginLeft: 16 }}
-                    onClick={() => {
-                        <Link to='/pravidlo' > some stuff </Link>
-                    }}
                 >
                     Delete
                 </Button>
+                </NavLink>
         </strong>
     )
 }
@@ -30,17 +30,16 @@ const renderDeleteButton = (params) => {
 const renderViewButton = (params) => {
     return (
         <strong>
+            <NavLink to="pravidlo/0">
             <Button
                     variant="contained"
                     color="primary"
                     size="small"
                     style={{ marginLeft: 16 }}
-                    onClick={() => {
-                        redirect("/pravidlo")
-                    }}
                 >
                     Zobraz
                 </Button>
+                </NavLink>
         </strong>
     )
 }
