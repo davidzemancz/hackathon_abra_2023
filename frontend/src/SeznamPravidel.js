@@ -4,7 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import {Button} from '@mui/material';
 
   
-const renderDetailsButton = (params) => {
+const renderDeleteButton = (params) => {
     return (
         <strong>
             <Button
@@ -16,7 +16,25 @@ const renderDetailsButton = (params) => {
                        
                     }}
                 >
-                    More Info
+                    Delete
+                </Button>
+        </strong>
+    )
+}
+
+const renderViewButton = (params) => {
+    return (
+        <strong>
+            <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    style={{ marginLeft: 16 }}
+                    onClick={() => {
+                       
+                    }}
+                >
+                    Zobraz
                 </Button>
         </strong>
     )
@@ -42,7 +60,7 @@ const columns = [
       field: 'Zobrazit',
       headerName: 'Zobrazit',
       width: 150,
-      renderCell: renderDetailsButton,
+      renderCell: renderViewButton,
       disableClickEventBubbling: true,
     },
     {
@@ -50,7 +68,7 @@ const columns = [
       headerName: 'Smazat',
       description: 'Smazat sadu',
       width: 150,
-      renderCell: renderDetailsButton,
+      renderCell: renderDeleteButton,
       disableClickEventBubbling: true,
     },
   ];
