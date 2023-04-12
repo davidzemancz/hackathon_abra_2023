@@ -137,8 +137,8 @@ export function GridPravidel(props){
             width: 100,
             editable: true,
         },
-        { field: 'zbytek', headerName: 'Zbytek',width: 80, renderCell: renderCheckbox, disableClickEventBubbling: true,},
-        { field: 'delete', headerName: '', width: 100, renderCell: renderDeleteButton, disableClickEventBubbling: true,}
+        { field: 'zbytek', headerName: 'Zbytek',width: 80, renderCell: renderCheckbox, disableClickEventBubbling: true, disableColumnMenu: true, sortable: false,},
+        { field: 'delete', headerName: '', width: 100, renderCell: renderDeleteButton, disableClickEventBubbling: true, disableColumnMenu: true, sortable: false,}
       ];
 
            
