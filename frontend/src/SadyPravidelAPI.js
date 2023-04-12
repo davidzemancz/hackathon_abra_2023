@@ -7,13 +7,19 @@ export function List(){
 }
 
 export function SaveMany(sady){
+    console.log("SaveMany")
+    console.log(sady)
     localStorage.setItem("sadyPravidel", JSON.stringify(sady));
 }
 
 export function Save(sada){
-    const sady = List();
+    let sady = List();
     if (sada.id === undefined || sada.id === 0) {
         sada.id = sady.list.length > 0 ? sady.list[sady.list.length - 1].id + 1 : 1;
+    }
+    else{
+        Delete(sada.id);
+        sady = List();
     }
     sady.list.push(sada);
     SaveMany(sady);
@@ -21,7 +27,7 @@ export function Save(sada){
 
 export function Load(sadaId){
     const sady = List();
-    var l = sady.list.filter(s => s.id === sadaId);
+    var l = sady.list.filter(s => s.id === parseInt(sadaId));
     var sada = { pravidla: [] };
     if (l.length > 0) sada = l[0];
     return sada;
@@ -29,8 +35,9 @@ export function Load(sadaId){
 
 export function Delete(sadaId){
     const sady = List();
-    const list = sady.list.filter(s => s.id != sadaId);
-    SaveMany({list: list})
+    const sadyList = sady.list.filter(s => s.id !== sadaId);
+    console.log("Volam save many")
+    SaveMany({list: sadyList});
 }
 
 export function PravidlaProFakturu(faktura){
