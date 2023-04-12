@@ -27,11 +27,12 @@ function DetailPravidla(){
 function GridPravidel(){
 
     const columns = [
-        { field: 'stredisko', headerName: 'Středisko', width: 100},
+        { field: 'id', headerName: '',width: 80},
+        { field: 'stredisko', headerName: 'Středisko', width: 200},
         {
           field: 'castka',
           headerName: 'Částka',
-          width: 100
+          width: 200
         },
         {
           field: 'procenta',
@@ -40,9 +41,9 @@ function GridPravidel(){
         },
         { field: 'zbytek', headerName: 'Zbytek', width: 80},
       ];
+
+    const rows = [];
       
-    <DataGrid>
-        
-    </DataGrid>
+    return <DataGrid rows={rows} columns={columns}/>
 }
 export default DetailPravidla;
