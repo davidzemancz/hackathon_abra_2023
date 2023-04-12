@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Container, FormControl, TextField } from "@mui/material";
+import { Box, Button, Checkbox, Container, FormControl, TextField, Divider, Grid } from "@mui/material";
 import { DataGrid} from '@mui/x-data-grid';
 import { useEffect, useState } from "react";
 import IconButton from '@mui/material/IconButton';
@@ -19,14 +19,15 @@ function DetailPravidla(){
 
     if (sada === null) return (<p>Načítání...</p>)
     else return (
-        <Box component="form"
-        sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch'}, textAlign: 'center'
-        }}>
-            <h3> Editace sady pravidel </h3>
+        <Grid container spacing={2}>
+            <Grid item xs={6}>
+                <Box component="form"
+                sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch'}, textAlign: 'center'
+            }}>
             <Container sx={{
                         textAlign: 'center',
-                        width: 800
+                        width: 750
                     }}>
                 <Button sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained">
                     Uložit
@@ -34,14 +35,18 @@ function DetailPravidla(){
                 </Button>
 
                 
-                <Paper elevation={2}
+                <Paper variant="outlined"
                     sx={{
                         textAlign: 'center',
+                        height: 370,
                     }}>
+                        <h4> Sada pravidel </h4>
                         <FormControl>
                             <div>
                                 <TextField required id="rule_name" label="Název" onChange={(e) => setSada({...sada, nazev: e.target.value})}/>
                             </div>
+                            <Divider width='700'></Divider>
+                            <h5> Podmínky </h5>
                             <div>
                                 <TextField id="rule_payer" label="Dodavatel" onChange={(e) => setSada({...sada, dodavatel: e.target.value})}/>
                                 <TextField id="rule_description" label="Popis" onChange={(e) => setSada({...sada, popis: e.target.value})}/>
@@ -53,18 +58,29 @@ function DetailPravidla(){
                         </FormControl>
                     </Paper>
             </Container>
+            </Box>
+            </Grid>
+
             
-            
-            <Container sx={{
+            <Grid item xs={6}>
+            <Box component="form"
+                sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch'}, textAlign: 'center'
+            }}>
+                <Container sx={{
                         textAlign: 'center',
-                        width: 800
+                        width: 750
                     }}>
                 <GridPravidel sada={sada} setSada={setSada}/>
 
             </Container>
+            </Box>
+            </Grid>
+            
             
 
-        </Box>
+        </Grid>
+        
     );
 }
 export function GridPravidel(props){
@@ -137,8 +153,15 @@ export function GridPravidel(props){
       
     return (
         <div>
-            <Button sx={{ m: 2 }} variant="contained" onClick={() => novyRadek()} startIcon={<AddIcon />}> Nové pravidlo </Button>
+            <Button sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained" onClick={() => novyRadek()} startIcon={<AddIcon />}> Nové pravidlo </Button>
             <DataGrid columns={columns} rows={props.sada.pravidla} autoHeight 
+            initialState={{
+                pagination: {
+                  paginationModel: {
+                    pageSize: 5,
+                  },
+                },
+              }}
             sx={{
                 textAlign: 'center',
               }}/>
