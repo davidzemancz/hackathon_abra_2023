@@ -7,7 +7,7 @@ import DetailPravidla from './DetailPravidla';
 function App() {
   return (
    <div>
-     <DetailPravidla/>
+     <SeznamPravidel/>
    </div>
   );
 }
