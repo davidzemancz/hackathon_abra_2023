@@ -23,7 +23,6 @@ function SeznamPravidel(props)
         }, []);
         
         const renderDeleteButton = (params) => {
-          console.log(params)
           return (
               <strong>
                   <IconButton aria-label="delete"
