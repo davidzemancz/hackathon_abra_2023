@@ -1,25 +1,36 @@
 import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <div>
+      <Seznam prvniPolozka="Ahoj Dito"/>
+      <Seznam prvniPolozka=""/>
+      <Tlacitko/>
+   </div>
   );
+}
+
+function Seznam(props){
+  const a = props.prvniPolozka + props.prvniPolozka;
+
+  return(
+    <ul>
+      <li>{a}</li>
+      <li>P1</li>
+      <li>P1</li>
+      <li>P1</li>
+    </ul>
+  );
+}
+
+function Tlacitko(props){
+  const [kolikrat, setKolikrat] = useState(0);
+
+  return (
+    <button onClick={() => setKolikrat(kolikrat + 1)}>Kliknul jsi {kolikrat}</button>
+  )
 }
 
 export default App;
