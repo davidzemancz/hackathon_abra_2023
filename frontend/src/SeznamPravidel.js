@@ -93,8 +93,8 @@ function SeznamPravidel(props)
         ];
 
         function smazPolozku(id) {
-            //setRows(rows => rows.filter(i => i.id != props.id))
-            alert("Mazu " + id)
+            setRows(rows.filter(row => row.id != id))
+            //alert("Mazu " + id)
         }
         
         let navigate = useNavigate(); 
