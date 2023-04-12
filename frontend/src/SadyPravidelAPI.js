@@ -34,9 +34,10 @@ export function PravidlaProFakturu(faktura){
     const sady = List();
     let sadyProFak = []
     for(var i = 0; i < sady.length; i++){
-        var sada = sady[i];
-
-        sadyProFak.push(sada)
+        if (faktura.nazFirmy == sady[i].dodavatel && faktura.sumCelkem >= sady[i].cenaOd && faktura.sumCelkem <= sady[i].cenaDo ) {
+            sadyProFak.push(sady[i])
+        }
     }
+   
     return sadyProFak
 }
