@@ -21,6 +21,8 @@ export function Save(sada){
         Delete(sada.id);
         sady = List();
     }
+    sada.pravidla[sada.pravidla.length - 1].zbytek = true;
+
     sady.list.push(sada);
     SaveMany(sady);
 }
