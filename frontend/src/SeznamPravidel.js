@@ -71,13 +71,11 @@ function SeznamPravidel(props)
             field: 'Četnost',
             headerName: 'Četnost',
             width: 150,
-            editable: true,
           },
           {
             field: 'Jméno',
             headerName: 'Jméno',
-            width: 150,
-            editable: true,
+            width: 200,
           },
           {
             field: 'Zobrazit',
@@ -112,19 +110,24 @@ function SeznamPravidel(props)
         }
 
         return (
-            <Box sx={{ height: 400, width: '100%' }}>
+            <Box 
+            // sx={{ height: 400, width: '100%' }}
+            >
               <Container
               sx = {{
-                textAlign: 'right',
+                textAlign: 'center',
               }}>
-                <Button variant="contained"
+                <Button sx = {{m: 2, backgroundColor: '#196FCA'}} variant="contained" 
            onClick={() => routeChangeToPravidlo} startIcon={<AddIcon />}>
             Nová sada pravidel
             </Button>
               </Container>
             
-           
-              <DataGrid
+              <Container sx={{
+                        textAlign: 'center',
+                        width: 650
+                    }}>
+                      <DataGrid autoHeight
                 rows={rows}
                 columns={columns}
                 initialState={{
@@ -137,6 +140,8 @@ function SeznamPravidel(props)
                 pageSizeOptions={[5]}
                 disableRowSelectionOnClick
               />
+             </Container>
+              
             </Box>
           );
     }

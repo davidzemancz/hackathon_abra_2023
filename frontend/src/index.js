@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     path: "/pravidlo/:id",
     element: <DetailPravidla/>
 
-  }
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
