@@ -19,7 +19,7 @@ const renderDeleteButton = (params) => {
                     color="primary"
                     size="small"
                     style={{ marginLeft: 16 }}
-                    onClick={smazPolozku(params.id)}
+                    // onClick={smazPolozku(params.id)}
                 >
                     Delete
                 </Button>

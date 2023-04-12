@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, FormControl, TextField } from "@mui/material";
+import { Box, Button, Checkbox, Container, FormControl, TextField } from "@mui/material";
 import { DataGrid} from '@mui/x-data-grid';
 import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
@@ -39,27 +39,42 @@ function DetailPravidla(){
     return (
         <Box component="form"
         sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
+            '& .MuiTextField-root': { m: 1, width: '25ch'}, textAlign: 'center'
         }}>
             <h3> Editace sady pravidel </h3>
-            <Paper elevation={2}
-            sx={{
-                width: 300,
-                color: 'success.main',
-              }}>
-                <FormControl>
-                    <div>
-                        <TextField required id="rule_name" label="Název"/>
-                        <TextField id="rule_payer" label="Zadavatel"/>
-                        <TextField id="rule_description" label="Popis"/>
-                        <TextField id="rule_upperBound" label="Cena do"/>
-                        <TextField id="rule_lowerBound" label="Cena od"/>
-                    </div>
-                </FormControl>
-            </Paper>
+            <Container sx={{
+                        textAlign: 'center',
+                        width: 800
+                    }}>
+                <Paper elevation={2}
+                    sx={{
+                        textAlign: 'center',
+                    }}>
+                        <FormControl>
+                            <div>
+                                <TextField required id="rule_name" label="Název"/>
+                            </div>
+                            <div>
+                                <TextField id="rule_payer" label="Zadavatel"/>
+                                <TextField id="rule_description" label="Popis"/>
+                            </div>
+                            <div>
+                                <TextField id="rule_upperBound" label="Cena do"/>
+                                <TextField id="rule_lowerBound" label="Cena od"/>
+                            </div>
+                        </FormControl>
+                    </Paper>
+            </Container>
             
+            
+            <Container sx={{
+                        textAlign: 'center',
+                        width: 800
+                    }}>
+                <GridPravidel/>
 
-            <GridPravidel/>
+            </Container>
+            
 
         </Box>
     );
@@ -68,19 +83,19 @@ export function GridPravidel(){
 
     const columns = [
         { field: 'id', headerName: '',width: 80},
-        { field: 'stredisko', headerName: 'Středisko', width: 200,},
+        { field: 'stredisko', headerName: 'Středisko', width: 120,},
         {
           field: 'castka',
           headerName: 'Částka',
           type: 'number',
-          width: 200,
+          width: 120,
           editable: true,
         },
         {
             field: 'procenta',
             headerName: 'Procenta',
             type: 'number',
-            width: 200,
+            width: 100,
             editable: true,
         },
         { field: 'zbytek', headerName: 'Zbytek',width: 80, renderCell: renderCheckbox, disableClickEventBubbling: true,},
@@ -110,7 +125,10 @@ export function GridPravidel(){
     return (
         <div>
             <Button onClick={() => novyRadek()}> Nové pravidlo </Button>
-            <DataGrid columns={columns} rows={rows} autoHeight/>
+            <DataGrid columns={columns} rows={rows} autoHeight 
+            sx={{
+                textAlign: 'center',
+              }}/>
         </div>
         
     );
