@@ -60,13 +60,13 @@ export function ZapoctenaFaktura(props){
         },
         {
             field: 'soucet',
-            headerName: 'soucet',
+            headerName: 'Součet',
             type: 'number',
             width: 100,
             editable: true,
             textAlign:"center",
         },
-        { field: 'zbytek', headerName: 'zbytek',width: 80},
+        { field: 'zbytek', headerName: 'Zbytek',width: 100, textAlign:"center",},
       ];
 
     return (
