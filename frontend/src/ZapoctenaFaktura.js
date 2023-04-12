@@ -47,7 +47,6 @@ export function ZapoctenaFaktura(props){
           headerName: 'Částka',
           type: 'number',
           width: 100,
-          editable: true,
           textAlign:"center",
         },
         {
@@ -55,7 +54,6 @@ export function ZapoctenaFaktura(props){
             headerName: 'Procenta',
             type: 'number',
             width: 100,
-            editable: true,
             textAlign:"center",
         },
         {
@@ -63,7 +61,6 @@ export function ZapoctenaFaktura(props){
             headerName: 'Součet',
             type: 'number',
             width: 100,
-            editable: true,
             textAlign:"center",
         },
         { field: 'zbytek', headerName: 'Zbytek',width: 100, textAlign:"center",},
