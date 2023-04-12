@@ -9,6 +9,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import SeznamPravidel from "./SeznamPravidel";
 import { GridPravidel } from "./DetailPravidla"
+import { ZapoctenaFaktura } from "./ZapoctenaFaktura";
 
 function RozuctovaniFaktury() {
 
@@ -26,8 +27,6 @@ function RozuctovaniFaktury() {
             const fak = response.data["winstrom"]["faktura-prijata"][0];
             setFaktura(fak);
             console.log("Faktura:", fak);
-            var a = zauctovani_faktury(fak, "", ["A","B","C"]);
-            console.log(a)
         });
     }, []);
    
@@ -71,7 +70,7 @@ function RozuctovaniFaktury() {
                     </FormControl>
                 </Paper>
                 <Paper>
-                   <GridPravidel/>
+                   <ZapoctenaFaktura rows={zauctovani_faktury(faktura, "", ["A","B","C"])}/>
                 </Paper>
             </Grid>
             <Grid item xs={6}>
@@ -92,32 +91,38 @@ function zauctovani_faktury(faktura, pravidlo) {
             {klic: "C",hotovost:15, procenta:25, zbytek:false}]
         }
 
-    var zauctovani = {}
+    var zauctovani = []
+    for (let i = 0; i < MockPravidlo.Strediska.length; i++) {
+        zauctovani.push({id:i,castka:0,procenta:0,procentaCastka:0,soucet:0,zbytek:0, stredisko:MockPravidlo.Strediska[i].klic});
+}
     var celkovePenez = faktura.sumCelkem;
     for (let i = 0; i < MockPravidlo.Strediska.length; i++) {
-            zauctovani[MockPravidlo.Strediska[i].klic] = MockPravidlo.Strediska[i].hotovost;
+            zauctovani[i].castka = MockPravidlo.Strediska[i].hotovost;
             celkovePenez -= MockPravidlo.Strediska[i].hotovost;
             console.log(celkovePenez)   
     }
 
     var odecist = 0
     for (let i = 0; i < MockPravidlo.Strediska.length; i++) {
-        zauctovani[MockPravidlo.Strediska[i].klic] += celkovePenez/100  * MockPravidlo.Strediska[i].procenta;
+        zauctovani[i].procentaCastka = celkovePenez/100  * MockPravidlo.Strediska[i].procenta;
+        zauctovani[i].procenta = MockPravidlo.Strediska[i].procenta;
         celkovePenez -= celkovePenez/100  * MockPravidlo.Strediska[i].procenta;
 }
     
     celkovePenez -= odecist;
-    if (celkovePenez > 0) {
-        for (let i = 0; i < MockPravidlo.Strediska; i++) {
-            if (MockPravidlo.Strediska[i].zbytek == true) {
-                zauctovani[MockPravidlo.Strediska[i].klic] += celkovePenez
-            }
-    }
+    for (let i = 0; i < MockPravidlo.Strediska.length; i++) {
+        if (MockPravidlo.Strediska[i].zbytek == true) zauctovani[i].zbytek = celkovePenez
     }
 
+    for (let i = 0; i < MockPravidlo.Strediska.length; i++) {
+        zauctovani[i].soucet = zauctovani[i].castka + zauctovani[i].procentaCastka + zauctovani[i].zbytek;
+    }
+
+   
+    zauctovani.push({id:"SUM", soucet:faktura.sumCelkem})
     return zauctovani;
-}
 
+}
 }
 
 
