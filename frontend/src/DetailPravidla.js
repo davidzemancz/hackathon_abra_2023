@@ -27,23 +27,21 @@ function DetailPravidla(){
 function GridPravidel(){
 
     const columns = [
-        { field: 'id', headerName: '',width: 80},
-        { field: 'stredisko', headerName: 'Středisko', width: 200, editable: true,},
+        // { field: 'id', headerName: '',width: 80},
+        { field: 'stredisko', headerName: 'Středisko', width: 200,},
         {
           field: 'castka',
           headerName: 'Částka',
           type: 'number',
           width: 200,
-          editable: true,
         },
         {
           field: 'procenta',
           headerName: 'Procentní podíl',
           type: 'number',
           width: 150,
-          editable: true,
         },
-        { field: 'zbytek', headerName: 'Zbytek', width: 80, editable: true,},
+        { field: 'zbytek', headerName: 'Zbytek', width: 80,},
         { filed: 'delete', headerName: '', width: 80},
       ];
 
@@ -63,7 +61,7 @@ function GridPravidel(){
       
     return (
         <div>
-            <DataGrid rows={rows} columns={columns}/>
+            <DataGrid columns={columns} rows={rows}/>
             <Button> Nové pravidlo </Button>
         </div>
         
