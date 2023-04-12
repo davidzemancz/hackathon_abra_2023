@@ -23,7 +23,7 @@ const router = createBrowserRouter([
 
   },
   {
-    path: "/pravidlo/:id",
+    path: "/pravidla/:id",
     element: <DetailPravidla/>
 
   },
