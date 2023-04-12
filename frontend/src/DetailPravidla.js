@@ -1,6 +1,38 @@
 import { Box, Button, Checkbox, FormControl, TextField } from "@mui/material";
 import { DataGrid} from '@mui/x-data-grid';
 import { useState } from "react";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+const renderDeleteButton = (params) => {
+    return (
+        <strong>
+            {/* <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    style={{ marginLeft: 16 }}
+                    onClick={() => {
+                        // <Link to='/pravidlo' > some stuff </Link>
+                    }}
+                >
+                    Delete
+                </Button> */}
+                <IconButton aria-label="delete" 
+                            onClick={() => {
+                        // <Link to='/pravidlo' > some stuff </Link>
+                    }}>
+                    <DeleteIcon />
+                </IconButton>
+        </strong>
+    )
+}
+
+const renderCheckbox = (params) => {
+    return(
+        <Checkbox />
+    )
+}
 
 function DetailPravidla(){
     return (
@@ -10,10 +42,11 @@ function DetailPravidla(){
         }}>
             <h3> Editace sady pravidel </h3>
             <FormControl>
-            <TextField required id="rule_name" label="Název"/>
-            <TextField id="rule_payer" label="Zadavatel"/>
-            <TextField id="rule_description" label="Popis"/>
             <div>
+                <TextField required id="rule_name" label="Název"/>
+                <TextField id="rule_payer" label="Zadavatel"/>
+                <TextField id="rule_description" label="Popis"/>
+                
                 <TextField id="rule_upperBound" label="Cena do"/>
                 <TextField id="rule_lowerBound" label="Cena od"/>
             </div>
@@ -35,14 +68,17 @@ function GridPravidel(){
           headerName: 'Částka',
           type: 'number',
           width: 200,
+          editable: true,
         },
         {
             field: 'procenta',
             headerName: 'Procenta',
             type: 'number',
             width: 200,
+            editable: true,
         },
-        { field: 'zbytek', headerName: 'Zbytek',width: 80, type: "checkbox"},
+        { field: 'zbytek', headerName: 'Zbytek',width: 80, renderCell: renderCheckbox, disableClickEventBubbling: true,},
+        { field: 'delete', headerName: '', width: 100, renderCell: renderDeleteButton, disableClickEventBubbling: true,}
       ];
 
     const [rows, setRows] = useState([
@@ -68,7 +104,7 @@ function GridPravidel(){
     return (
         <div>
             <Button onClick={() => novyRadek()}> Nové pravidlo </Button>
-            <DataGrid columns={columns} rows={rows} autoHeight checkboxSelection/>
+            <DataGrid columns={columns} rows={rows} autoHeight/>
         </div>
         
     );
