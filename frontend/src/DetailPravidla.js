@@ -5,16 +5,19 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from '@mui/material/Paper';
 import AddIcon from '@mui/icons-material/Add';
-import { Load } from "./SadyPravidelAPI"
-import { useParams } from "react-router-dom";
+import { Load, Save } from "./SadyPravidelAPI"
+import { useNavigate, useParams } from "react-router-dom";
 
 
 function DetailPravidla(){
     const [sada, setSada] = useState(null)
     let { id } = useParams();
+    let navigate = useNavigate();
 
     useEffect(() => {
-        setSada(Load(id))
+        const s = Load(id)
+        setSada(s)
+        console.log(s)
     }, [])
 
     if (sada === null) return (<p>Načítání...</p>)
@@ -29,7 +32,7 @@ function DetailPravidla(){
                         textAlign: 'center',
                         width: 750
                     }}>
-                <Button sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained">
+                <Button onClick={(e) => {Save(sada); navigate("/pravidla")}} sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained">
                     Uložit
 
                 </Button>
@@ -43,7 +46,7 @@ function DetailPravidla(){
                         <h4> Sada pravidel </h4>
                         <FormControl>
                             <div>
-                                <TextField required id="rule_name" label="Název" onChange={(e) => setSada({...sada, nazev: e.target.value})}/>
+                                <TextField required id="rule_name" label="Název" value={sada.nazev} onChange={(e) => setSada({...sada, nazev: e.target.value})}/>
                             </div>
                             <Divider width='700'></Divider>
                             <h5> Podmínky </h5>

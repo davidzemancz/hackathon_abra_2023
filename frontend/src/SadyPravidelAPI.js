@@ -2,7 +2,7 @@
 
 export function List(){
     var sady = JSON.parse(localStorage.getItem("sadyPravidel"));
-    if (sady === null) sady = { list: [ {id: 0, nazev: "Sada 1"} ] };
+    if (sady === null) sady = { list: [ ] };
     return sady;
 }
 
@@ -12,13 +12,16 @@ export function SaveMany(sady){
 
 export function Save(sada){
     const sady = List();
+    if (sada.id === undefined || sada.id === 0) {
+        sada.id = sady.list.length > 0 ? sady.list[sady.list.length - 1].id + 1 : 1;
+    }
     sady.list.push(sada);
     SaveMany(sady);
 }
 
 export function Load(sadaId){
     const sady = List();
-    var l = sady.list.filter(s => s.id == sadaId);
+    var l = sady.list.filter(s => s.id === sadaId);
     var sada = { pravidla: [] };
     if (l.length > 0) sada = l[0];
     return sada;
