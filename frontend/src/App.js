@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import { useState } from 'react';
 import './App.css';
+import SeznamPravidel from './SeznamPravidel';
+import DetailPravidla from './DetailPravidla';
 
 function App() {
   return (
    <div>
-      <Seznam prvniPolozka="Ahoj Dito"/>
-      <Seznam prvniPolozka=""/>
-      <Tlacitko/>
+     <DetailPravidla/>
    </div>
   );
 }
