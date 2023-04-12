@@ -22,6 +22,10 @@
 * Komponenta pro zobrazení (vytvoření) pravidla
   * Formuláře
     * Název
+  * Podmínky
+    * Dodavatel
+    * Popis
+    * Cenový interval
   * DataGrid
     * Středisko (výběr se seznamu)
       * Načte se z REST API 
