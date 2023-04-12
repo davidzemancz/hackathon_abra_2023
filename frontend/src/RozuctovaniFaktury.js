@@ -42,15 +42,15 @@ function RozuctovaniFaktury() {
     const renderApplyButton = (params) => {
         return (
             <strong>
-                <IconButton
+                <Button sx = {{m: 2, backgroundColor: '#196FCA'}} variant="contained"
                         // variant="contained"
                         // color="primary"
-                        // size="small"
-                        // style={{ marginLeft: 16 }}
+                        size="small"
+                        //style={{ marginLeft: 16 }}
                         onClick={() => alert(params.id)}
                     >
-                        <DeleteIcon />
-                    </IconButton>
+                        Použít
+                    </Button>
             </strong>
         )
       }
@@ -69,8 +69,8 @@ function RozuctovaniFaktury() {
         },
         {
             field: 'pouzit',
-            headerName: 'Použít',
-            width: 80,
+            headerName: '',
+            width: 150,
             renderCell: renderApplyButton,
             disableClickEventBubbling: true,
             sortable: false,
@@ -125,13 +125,14 @@ function RozuctovaniFaktury() {
 
                 <h5>Rozúčtování na střediska</h5>
                    <ZapoctenaFaktura rows={zauctovani_faktury(faktura, "", ["A","B","C"])}/>
-                   <Button sx = {{ backgroundColor: '#196FCA'}} variant="contained">
+                </Paper>
+                <Button sx = {{ ml:40, backgroundColor: '#196FCA'}} variant="contained">
                     Uložit
                    </Button>
-                </Paper>
             </Grid>
             <Grid item xs={6}>
-                <Paper>
+                <Paper sx={{m:2, mt:8, textAlign: 'center'}} variant="outlined">
+                    <h5> Sady pravidel</h5>
                 <DataGrid autoHeight
                     rows={sadyPravidel}
                     columns={sadyPravidelCols}
