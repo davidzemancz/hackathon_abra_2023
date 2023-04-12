@@ -32,7 +32,7 @@ function DetailPravidla(){
                         textAlign: 'center',
                         width: 750
                     }}>
-                <Button onClick={(e) => {Save(sada); navigate("/pravidla")}} sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained">
+                <Button onClick={(e) => {console.log("SaveSada",sada); Save(sada); navigate("/pravidla")}} sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained">
                     Uložit
 
                 </Button>
@@ -55,12 +55,12 @@ function DetailPravidla(){
                             <Divider width='700'></Divider>
                             <h5> Podmínky </h5>
                             <div>
-                                <TextField id="rule_payer" label="Dodavatel" onChange={(e) => setSada({...sada, dodavatel: e.target.value})}/>
-                                <TextField id="rule_description" label="Popis" onChange={(e) => setSada({...sada, popis: e.target.value})}/>
+                                <TextField id="rule_payer" label="Dodavatel" value={sada.dodavatel} onChange={(e) => setSada({...sada, dodavatel: e.target.value})}/>
+                                <TextField id="rule_description" label="Popis" value={sada.popis} onChange={(e) => setSada({...sada, popis: e.target.value})}/>
                             </div>
                             <div>
-                                <TextField id="rule_upperBound" label="Cena do" onChange={(e) => setSada({...sada, cenaOd: e.target.value})}/>
-                                <TextField id="rule_lowerBound" label="Cena od" onChange={(e) => setSada({...sada, cenaDo: e.target.value})}/>
+                                <TextField id="rule_upperBound" label="Cena do" value={sada.cenaOd} onChange={(e) => setSada({...sada, cenaOd: e.target.value})}/>
+                                <TextField id="rule_lowerBound" label="Cena od" value={sada.cenaDo} onChange={(e) => setSada({...sada, cenaDo: e.target.value})}/>
                             </div>
                         </FormControl>
                     </Paper>
@@ -157,11 +157,21 @@ export function GridPravidel(props){
     function smazPolozku(id) {
         props.setSada({...props.sada, pravidla: props.sada.pravidla.filter(p => p.id != id)})
     }
+
+    const processRowUpdate = (newRow) => {
+        props.setSada({...props.sada, pravidla: [...props.sada.pravidla.map(p => {
+            if(p.id == newRow.id) return newRow
+            else return p
+        })]});
+        return newRow;
+    };
       
     return (
         <div>
             <Button sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained" onClick={() => novyRadek()} startIcon={<AddIcon />}> Nové pravidlo </Button>
             <DataGrid columns={columns} rows={props.sada.pravidla} autoHeight 
+            experimentalFeatures={{ newEditingApi: true }}
+            processRowUpdate={(newRow) => processRowUpdate(newRow)}
             initialState={{
                 pagination: {
                   paginationModel: {
