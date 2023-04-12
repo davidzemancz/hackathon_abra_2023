@@ -8,12 +8,25 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
+import SeznamPravidel from './SeznamPravidel';
+import DetailPravidla from './DetailPravidla';
+import RozuctovaniFaktury from './RozuctovaniFaktury';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <RozuctovaniFaktury/>,
   },
+  {
+    path: "/pravidla",
+    element: <SeznamPravidel/>
+
+  },
+  {
+    path: "/pravidlo/:id",
+    element: <DetailPravidla/>
+
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
