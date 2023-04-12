@@ -3,8 +3,11 @@ import { useState } from 'react';
 import './App.css';
 import SeznamPravidel from './SeznamPravidel';
 import DetailPravidla from './DetailPravidla';
+import { useSearchParams } from 'react-router-dom'
 
 function App() {
+  
+
   return (
    <div>
      <DetailPravidla/>

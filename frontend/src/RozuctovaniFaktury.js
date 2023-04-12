@@ -3,10 +3,17 @@ import ZobrazQueryParametry from "./ZobrazQueryParametry";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Grid from '@mui/material/Grid';
+import { useSearchParams } from 'react-router-dom'
 
 function RozuctovaniFaktury(){
 
     const [faktura, setFaktura] = useState(null);
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    localStorage.setItem("authSessionId", searchParams.get('authSessionId'));
+    localStorage.setItem("companyUrl", searchParams.get('companyUrl'));
+    localStorage.setItem("objectId", searchParams.get('objectId'));
+    localStorage.setItem("objectIds", searchParams.get('objectIds'));
 
     useEffect(() => {
         axios.get(`${localStorage.getItem("companyUrl")}/faktura-prijata/${localStorage.getItem("objectId")}.json?authSessionId=${localStorage.getItem("authSessionId")}`).then((response) => {
@@ -21,7 +28,7 @@ function RozuctovaniFaktury(){
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <Paper>
-                <ZobrazQueryParametry/>
+                    <ZobrazQueryParametry/>
                 </Paper>
             </Grid>
             <Grid  item xs={6}>
