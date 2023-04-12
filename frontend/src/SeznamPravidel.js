@@ -5,11 +5,12 @@ import {Button} from '@mui/material';
 import { NavLink, redirect } from "react-router-dom";
 import {Link} from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
   
-function renderDeleteButton(params) {
-
+const renderDeleteButton = (params) => {
+    console.log(params)
     return (
         <strong>
             <NavLink to="pravidlo/0">
@@ -18,6 +19,7 @@ function renderDeleteButton(params) {
                     color="primary"
                     size="small"
                     style={{ marginLeft: 16 }}
+                    onClick={smazPolozku(params.id)}
                 >
                     Delete
                 </Button>
@@ -73,7 +75,7 @@ const columns = [
       headerName: 'Smazat',
       description: 'Smazat sadu',
       width: 150,
-      renderCell: renderDeleteButton,
+      renderCell: () => <renderDeleteButton/>,
       disableClickEventBubbling: true,
     },
   ];
@@ -99,6 +101,14 @@ const rows = [
 
 function SeznamPravidel(props)
     {
+        const [rowsModified, setRows] = useState(rows
+        );
+
+        function smazPolozku(props) {
+            setRows(rows => rows.filter(i => i.id != props.id))
+        }
+        
+       
         let navigate = useNavigate(); 
         const routeChangeToPravidlo = () =>{ 
           let path = `pravidlo/0`; 
