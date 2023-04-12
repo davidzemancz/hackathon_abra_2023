@@ -18,7 +18,10 @@ export function Save(sada){
 
 export function Load(sadaId){
     const sady = List();
-    return sady.list.filter(s => s.id == sadaId);
+    var l = sady.list.filter(s => s.id == sadaId);
+    var sada = { pravidla: [] };
+    if (l.length > 0) sada = l[0];
+    return sada;
 }
 
 export function Delete(sadaId){
