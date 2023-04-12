@@ -47,7 +47,7 @@ function RozuctovaniFaktury() {
             }}>
                 <h3> Faktura </h3>
                 <Paper sx={{m:2, borderColor:'#BAD5F3'}} variant="outlined">
-                    <FormControl >
+                    <FormControl>
                         <TextField
                             id="dodavatel"
                             label="Dodavatel"
