@@ -36,6 +36,10 @@ function DetailPravidla(){
                     Uložit
 
                 </Button>
+                <Button onClick={(e) => {navigate("/pravidla")}} sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained">
+                    Zpět
+
+                </Button>
 
                 
                 <Paper variant="outlined"
