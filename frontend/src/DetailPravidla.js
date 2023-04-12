@@ -1,4 +1,4 @@
-import { Box, FormControl, TextField } from "@mui/material";
+import { Box, Button, FormControl, TextField } from "@mui/material";
 import { DataGrid} from '@mui/x-data-grid';
 
 function DetailPravidla(){
@@ -28,22 +28,46 @@ function GridPravidel(){
 
     const columns = [
         { field: 'id', headerName: '',width: 80},
-        { field: 'stredisko', headerName: 'Středisko', width: 200},
+        { field: 'stredisko', headerName: 'Středisko', width: 200, editable: true,},
         {
           field: 'castka',
           headerName: 'Částka',
-          width: 200
+          type: 'number',
+          width: 200,
+          editable: true,
         },
         {
           field: 'procenta',
           headerName: 'Procentní podíl',
-          width: 150
+          type: 'number',
+          width: 150,
+          editable: true,
         },
-        { field: 'zbytek', headerName: 'Zbytek', width: 80},
+        { field: 'zbytek', headerName: 'Zbytek', width: 80, editable: true,},
+        { filed: 'delete', headerName: '', width: 80},
       ];
 
-    const rows = [];
+    const rows = [
+        {
+            id: 1,
+            stredisko: 'C',
+            castka: 2500,
+            procenta: 20,
+            zbytek: 'ne',
+            delete: 'ne',
+        },
+        ];
+
+    function novyRadek() {
+    }
       
-    return <DataGrid rows={rows} columns={columns}/>
+    return (
+        <div>
+            <DataGrid rows={rows} columns={columns}/>
+            <Button> Nové pravidlo </Button>
+        </div>
+        
+    );
+    
 }
 export default DetailPravidla;
