@@ -46,7 +46,7 @@ function RozuctovaniFaktury() {
                 '& .MuiTextField-root': { m: 1, width: '25ch'}, textAlign: 'center'
             }}>
                 <h3> Faktura </h3>
-                <Paper sx={{m:2, borderColor:'#BAD5F3'}} variant="outlined">
+                <Paper sx={{m:2}} variant="outlined">
                     <FormControl>
                         <TextField
                             id="dodavatel"
@@ -74,10 +74,12 @@ function RozuctovaniFaktury() {
                         />
                     </FormControl>
                 </Paper>
-            </Box>
-                <Paper variant="outlined" sx={{m:2, borderColor:'#BAD5F3'}}>
+            </Box >
+                <Paper variant="outlined" sx={{m:2, textAlign: 'center'}}>
+
+                <h5>Rozúčtování na střediska</h5>
                    <ZapoctenaFaktura rows={zauctovani_faktury(faktura, "", ["A","B","C"])}/>
-                   <Button>
+                   <Button sx = {{ backgroundColor: '#196FCA'}} variant="contained">
                     Uložit
                    </Button>
                 </Paper>
