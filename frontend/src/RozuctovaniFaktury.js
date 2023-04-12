@@ -35,14 +35,19 @@ function RozuctovaniFaktury() {
     if (faktura === null) return (<p>Načítání...</p>);
     else return (
         <Grid container spacing={2}>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <Paper>
                     <ZobrazQueryParametry />
                 </Paper>
-            </Grid>
+            </Grid> */}
             <Grid item xs={6}>
-                <Paper>
-                    <FormControl>
+            <Box component="form"
+                sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch'}, textAlign: 'center'
+            }}>
+                <h3> Faktura </h3>
+                <Paper sx={{m:2, borderColor:'#BAD5F3'}} variant="outlined">
+                    <FormControl >
                         <TextField
                             id="dodavatel"
                             label="Dodavatel"
@@ -69,7 +74,8 @@ function RozuctovaniFaktury() {
                         />
                     </FormControl>
                 </Paper>
-                <Paper>
+            </Box>
+                <Paper variant="outlined" sx={{m:2, borderColor:'#BAD5F3'}}>
                    <ZapoctenaFaktura rows={zauctovani_faktury(faktura, "", ["A","B","C"])}/>
                 </Paper>
             </Grid>
