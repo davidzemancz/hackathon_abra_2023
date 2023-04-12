@@ -1,5 +1,6 @@
-import { Box, Button, FormControl, TextField } from "@mui/material";
+import { Box, Button, Checkbox, FormControl, TextField } from "@mui/material";
 import { DataGrid} from '@mui/x-data-grid';
+import { useState } from "react";
 
 function DetailPravidla(){
     return (
@@ -27,7 +28,7 @@ function DetailPravidla(){
 function GridPravidel(){
 
     const columns = [
-        // { field: 'id', headerName: '',width: 80},
+        { field: 'id', headerName: '',width: 80},
         { field: 'stredisko', headerName: 'Středisko', width: 200,},
         {
           field: 'castka',
@@ -36,33 +37,38 @@ function GridPravidel(){
           width: 200,
         },
         {
-          field: 'procenta',
-          headerName: 'Procentní podíl',
-          type: 'number',
-          width: 150,
+            field: 'procenta',
+            headerName: 'Procenta',
+            type: 'number',
+            width: 200,
         },
-        { field: 'zbytek', headerName: 'Zbytek', width: 80,},
-        { filed: 'delete', headerName: '', width: 80},
+        { field: 'zbytek', headerName: 'Zbytek',width: 80, type: "checkbox"},
       ];
 
-    const rows = [
+    const [rows, setRows] = useState([
         {
             id: 1,
             stredisko: 'C',
             castka: 2500,
             procenta: 20,
-            zbytek: 'ne',
-            delete: 'ne',
+            zbytek: true, 
         },
-        ];
+        ]);
 
     function novyRadek() {
+        const novyRadek = {
+            id: rows.length > 0 ? rows[rows.length - 1].id + 1 : 1,
+            stredisko: 'C',
+            castka: 0,
+            procenta: 0,
+        };
+        setRows(rows => [...rows, novyRadek])
     }
       
     return (
         <div>
-            <DataGrid columns={columns} rows={rows}/>
-            <Button> Nové pravidlo </Button>
+            <Button onClick={() => novyRadek()}> Nové pravidlo </Button>
+            <DataGrid columns={columns} rows={rows} autoHeight checkboxSelection/>
         </div>
         
     );
