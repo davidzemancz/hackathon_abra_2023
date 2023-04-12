@@ -76,7 +76,7 @@ function RozuctovaniFaktury() {
             </Grid>
             <Grid item xs={6}>
                 <Paper>
-                    <SeznamPravidel/>
+                    {/* <SeznamPravidel/> */}
                 </Paper>
             </Grid>
         </Grid>

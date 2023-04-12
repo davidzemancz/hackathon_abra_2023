@@ -19,7 +19,7 @@ function DetailPravidla(){
                         textAlign: 'center',
                         width: 800
                     }}>
-                <Button sx={{ m: 2 }} variant="contained">
+                <Button sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained">
                     Uložit
 
                 </Button>
@@ -138,8 +138,8 @@ export function GridPravidel(){
       
     return (
         <div>
-            <Button sx={{ m: 2 }} variant="contained" onClick={() => novyRadek()} startIcon={<AddIcon />}> Nové pravidlo </Button>
-            <DataGrid columns={columns} rows={rows} autoHeight 
+            <Button sx={{ m: 2, backgroundColor: '#196FCA' }} variant="contained" onClick={() => novyRadek()} startIcon={<AddIcon />}> Nové pravidlo </Button>
+            <DataGrid columns={columns} rows={rows} autoHeight
             sx={{
                 textAlign: 'center',
               }}/>
