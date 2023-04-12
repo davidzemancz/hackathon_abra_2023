@@ -42,12 +42,11 @@ export function Delete(sadaId){
 
 export function PravidlaProFakturu(faktura){
     const sady = List();
-    let sadyProFak = []
+    let sadyProFak = [{id:0}];
     for(var i = 0; i < sady.length; i++){
         if (faktura.nazFirmy == sady[i].dodavatel && faktura.sumCelkem >= sady[i].cenaOd && faktura.sumCelkem <= sady[i].cenaDo ) {
             sadyProFak.push(sady[i])
         }
     }
-   
     return sadyProFak
 }

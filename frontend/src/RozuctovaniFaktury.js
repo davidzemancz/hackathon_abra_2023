@@ -10,12 +10,16 @@ import Button from "@mui/material/Button";
 import SeznamPravidel from "./SeznamPravidel";
 import { GridPravidel } from "./DetailPravidla"
 import { ZapoctenaFaktura } from "./ZapoctenaFaktura";
+import { PravidlaProFakturu, List } from "./SadyPravidelAPI"
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function RozuctovaniFaktury() {
 
     
     const [faktura, setFaktura] = useState(null);
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [sadyPravidel, setSadyPravidel] = useState(null);
 
     localStorage.setItem("authSessionId", searchParams.get('authSessionId'));
     localStorage.setItem("companyUrl", searchParams.get('companyUrl'));
@@ -26,13 +30,55 @@ function RozuctovaniFaktury() {
         axios.get(`${localStorage.getItem("companyUrl")}/faktura-prijata/${localStorage.getItem("objectId")}.json?authSessionId=${localStorage.getItem("authSessionId")}`).then((response) => {
             const fak = response.data["winstrom"]["faktura-prijata"][0];
             setFaktura(fak);
-            console.log("Faktura:", fak);
+
+            // const sp = PravidlaProFakturu(fak);
+            // setSadyPravidel(sp);
+            const sp = List().list;
+            setSadyPravidel(sp);
         });
     }, []);
-   
 
 
-    if (faktura === null) return (<p>Načítání...</p>);
+    const renderApplyButton = (params) => {
+        return (
+            <strong>
+                <IconButton
+                        // variant="contained"
+                        // color="primary"
+                        // size="small"
+                        // style={{ marginLeft: 16 }}
+                        onClick={() => alert(params.id)}
+                    >
+                        <DeleteIcon />
+                    </IconButton>
+            </strong>
+        )
+      }
+
+    const sadyPravidelCols = [
+        { field: 'id', headerName: 'ID', width: 90 },
+        {
+          field: 'Četnost',
+          headerName: 'Četnost',
+          width: 150,
+        },
+        {
+          field: 'nazev',
+          headerName: 'Jméno',
+          width: 200,
+        },
+        {
+            field: 'pouzit',
+            headerName: 'Použít',
+            width: 80,
+            renderCell: renderApplyButton,
+            disableClickEventBubbling: true,
+            sortable: false,
+            disableColumnMenu: true,
+          },
+      ];
+
+    if (faktura === null || sadyPravidel === null) return (<p>Načítání...</p>);
     else return (
         <Grid container spacing={2}>
             {/* <Grid item xs={12}>
@@ -86,7 +132,19 @@ function RozuctovaniFaktury() {
             </Grid>
             <Grid item xs={6}>
                 <Paper>
-                    {/* <SeznamPravidel/> */}
+                <DataGrid autoHeight
+                    rows={sadyPravidel}
+                    columns={sadyPravidelCols}
+                    initialState={{
+                    pagination: {
+                        paginationModel: {
+                        pageSize: 5,
+                        },
+                    },
+                    }}
+                    pageSizeOptions={[5]}
+                    disableRowSelectionOnClick
+                />
                 </Paper>
             </Grid>
         </Grid>
