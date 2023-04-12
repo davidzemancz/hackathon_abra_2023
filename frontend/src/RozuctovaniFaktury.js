@@ -47,7 +47,10 @@ function RozuctovaniFaktury() {
                         // color="primary"
                         size="small"
                         //style={{ marginLeft: 16 }}
-                        onClick={() => alert(params.id)}
+                        onClick={() => {
+                            const ret = zauctovani_faktury(faktura, sadyPravidel.filter(s => s.id === params.id)[0])
+                            console.log("ret", ret);
+                        }}
                     >
                         Použít
                     </Button>
@@ -124,9 +127,9 @@ function RozuctovaniFaktury() {
                 <Paper variant="outlined" sx={{m:2, textAlign: 'center'}}>
 
                 <h5>Rozúčtování na střediska</h5>
-                   <ZapoctenaFaktura rows={zauctovani_faktury(faktura, "", ["A","B","C"])}/>
+                   <ZapoctenaFaktura rows={zauctovani_faktury(faktura, sadyPravidel[0])}/>
                 </Paper>
-                <Button sx = {{ ml:40, backgroundColor: '#196FCA'}} variant="contained">
+                <Button sx = {{ m:2, backgroundColor: '#196FCA'}} variant="contained">
                     Uložit
                    </Button>
             </Grid>
@@ -154,37 +157,40 @@ function RozuctovaniFaktury() {
 
 function zauctovani_faktury(faktura, pravidlo) {
     
-    var MockPravidlo = 
-        { id: 1, Jméno: 'Prvni Pravidlo', View: 'Jon', Četnost: 35, Strediska:  [
-            {klic: "A", hotovost:15, procenta:0, zbytek:true},
-            {klic: "B", hotovost:30, procenta:0, zbytek:false},
-            {klic: "C",hotovost:15, procenta:25, zbytek:false}]
-        }
+    console.log("pravidlo");
+    //console.log(pravidlo);
+
+    // pravidlo = 
+    //     { id: 1, Jméno: 'Prvni Pravidlo', View: 'Jon', Četnost: 35, pravidla:  [
+    //         {stredisko: "A", castka:15, procenta:0, zbytek:true},
+    //         {stredisko: "B", castka:30, procenta:0, zbytek:false},
+    //         {stredisko: "C",castka:15, procenta:25, zbytek:false}]
+    //     }
 
     var zauctovani = []
-    for (let i = 0; i < MockPravidlo.Strediska.length; i++) {
-        zauctovani.push({id:i,castka:0,procenta:0,procentaCastka:0,soucet:0,zbytek:0, stredisko:MockPravidlo.Strediska[i].klic});
+    for (let i = 0; i < pravidlo.pravidla.length; i++) {
+        zauctovani.push({id:i,castka:0,procenta:0,procentaCastka:0,soucet:0,zbytek:0, stredisko:pravidlo.pravidla[i].stredisko});
 }
     var celkovePenez = faktura.sumCelkem;
-    for (let i = 0; i < MockPravidlo.Strediska.length; i++) {
-            zauctovani[i].castka = MockPravidlo.Strediska[i].hotovost;
-            celkovePenez -= MockPravidlo.Strediska[i].hotovost;
+    for (let i = 0; i < pravidlo.pravidla.length; i++) {
+            zauctovani[i].castka = pravidlo.pravidla[i].castka;
+            celkovePenez -= pravidlo.pravidla[i].castka;
             console.log(celkovePenez)   
     }
 
     var odecist = 0
-    for (let i = 0; i < MockPravidlo.Strediska.length; i++) {
-        zauctovani[i].procentaCastka = celkovePenez/100  * MockPravidlo.Strediska[i].procenta;
-        zauctovani[i].procenta = MockPravidlo.Strediska[i].procenta;
-        celkovePenez -= celkovePenez/100  * MockPravidlo.Strediska[i].procenta;
+    for (let i = 0; i < pravidlo.pravidla.length; i++) {
+        zauctovani[i].procentaCastka = celkovePenez/100  * pravidlo.pravidla[i].procenta;
+        zauctovani[i].procenta = pravidlo.pravidla[i].procenta;
+        celkovePenez -= celkovePenez/100  * pravidlo.pravidla[i].procenta;
 }
     
     celkovePenez -= odecist;
-    for (let i = 0; i < MockPravidlo.Strediska.length; i++) {
-        if (MockPravidlo.Strediska[i].zbytek == true) zauctovani[i].zbytek = celkovePenez
+    for (let i = 0; i < pravidlo.pravidla.length; i++) {
+        if (pravidlo.pravidla[i].zbytek == true) zauctovani[i].zbytek = celkovePenez
     }
 
-    for (let i = 0; i < MockPravidlo.Strediska.length; i++) {
+    for (let i = 0; i < pravidlo.pravidla.length; i++) {
         zauctovani[i].soucet = zauctovani[i].castka + zauctovani[i].procentaCastka + zauctovani[i].zbytek;
     }
 
