@@ -77,6 +77,9 @@ function RozuctovaniFaktury() {
             </Box>
                 <Paper variant="outlined" sx={{m:2, borderColor:'#BAD5F3'}}>
                    <ZapoctenaFaktura rows={zauctovani_faktury(faktura, "", ["A","B","C"])}/>
+                   <Button>
+                    Uložit
+                   </Button>
                 </Paper>
             </Grid>
             <Grid item xs={6}>
