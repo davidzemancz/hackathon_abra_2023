@@ -4,6 +4,7 @@ import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from '@mui/material/Paper';
+import AddIcon from '@mui/icons-material/Add';
 
 const renderDeleteButton = (params) => {
     return (
@@ -46,6 +47,12 @@ function DetailPravidla(){
                         textAlign: 'center',
                         width: 800
                     }}>
+                <Button sx={{ m: 2 }} variant="contained">
+                    Uložit
+
+                </Button>
+
+                
                 <Paper elevation={2}
                     sx={{
                         textAlign: 'center',
@@ -124,7 +131,7 @@ export function GridPravidel(){
       
     return (
         <div>
-            <Button onClick={() => novyRadek()}> Nové pravidlo </Button>
+            <Button sx={{ m: 2 }} variant="contained" onClick={() => novyRadek()} startIcon={<AddIcon />}> Nové pravidlo </Button>
             <DataGrid columns={columns} rows={rows} autoHeight 
             sx={{
                 textAlign: 'center',

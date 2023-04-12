@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
 import {Button} from '@mui/material';
 import { NavLink, redirect } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
 
 
 function SeznamPravidel(props)
@@ -112,10 +113,16 @@ function SeznamPravidel(props)
 
         return (
             <Box sx={{ height: 400, width: '100%' }}>
-            <Button
-           onClick={() => routeChangeToPravidlo}>
-            Nove pravidlo
+              <Container
+              sx = {{
+                textAlign: 'right',
+              }}>
+                <Button variant="contained"
+           onClick={() => routeChangeToPravidlo} startIcon={<AddIcon />}>
+            Nová sada pravidel
             </Button>
+              </Container>
+            
            
               <DataGrid
                 rows={rows}
