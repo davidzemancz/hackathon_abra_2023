@@ -2,7 +2,7 @@
 
 export function List(){
     var sady = JSON.parse(localStorage.getItem("sadyPravidel"));
-    if (sady === null) sady = { list: [] };
+    if (sady === null) sady = { list: [ {id: 0, nazev: "Sada 1"} ] };
     return sady;
 }
 
@@ -28,5 +28,15 @@ export function Delete(sadaId){
     const sady = List();
     const list = sady.list.filter(s => s.id != sadaId);
     SaveMany({list: list})
+}
 
+export function PravidlaProFakturu(faktura){
+    const sady = List();
+    let sadyProFak = []
+    for(var i = 0; i < sady.length; i++){
+        var sada = sady[i];
+
+        sadyProFak.push(sada)
+    }
+    return sadyProFak
 }

@@ -10,27 +10,18 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
+import { useEffect } from 'react';
+import { List } from "./SadyPravidelAPI";
 
 
 function SeznamPravidel(props)
     {
-        const [rows, setRows] = useState([
-          { id: 1, Jméno: 'Prvni Pravidlo', View: 'Jon', Četnost: 35, Sklady:  {
-              A:{hotovost:15, procenta:0, zbytek:false},
-              B:{hotovost:15, procenta:0, zbytek:false},
-              C:{hotovost:15, procenta:0, zbytek:false},
-          }},
-          { id: 2, Jméno: 'Druhe Pravidlo', View: 'Cersei', Četnost: 42 },
-          { id: 3, Jméno: 'Treti', View: 'Jaime', Četnost: 45 },
-          { id: 4, Jméno: '4', View: 'Arya', Četnost: 16 },
-          { id: 5, Jméno: '5', View: 'Daenerys', Četnost: 15 },
-          { id: 6, Jméno: '6', View: null, Četnost: 150 },
-          { id: 7, Jméno: '7', View: 'Ferrara', Četnost: 44 },
-          { id: 8, Jméno: '8', View: 'Rossini', Četnost: 36 },
-          { id: 9, Jméno: '9', View: 'Harvey', Četnost: 65 },
-        ]);
+        const [rows, setRows] = useState(null);
 
-          
+        useEffect(() => {
+            setRows(List().list)
+        }, []);
+        
         const renderDeleteButton = (params) => {
           console.log(params)
           return (
@@ -49,9 +40,10 @@ function SeznamPravidel(props)
         }
 
         const renderViewButton = (params) => {
+
           return (
               <strong>
-                  <NavLink to="pravidlo/0">
+                  <NavLink to={"/pravidla/" + params.id}>
                   <IconButton aria-label="edit"
                           // variant="contained"
                           // color="primary"
@@ -73,7 +65,7 @@ function SeznamPravidel(props)
             width: 150,
           },
           {
-            field: 'Jméno',
+            field: 'nazev',
             headerName: 'Jméno',
             width: 200,
           },
@@ -105,11 +97,11 @@ function SeznamPravidel(props)
         
         let navigate = useNavigate(); 
         const routeChangeToPravidlo = () =>{ 
-          let path = `pravidlo/0`; 
-          navigate(path);
+          navigate("/pravidla/0");
         }
 
-        return (
+        if (rows === null) return (<p>Načítání...</p>)
+        else return (
             <Box 
             // sx={{ height: 400, width: '100%' }}
             >
@@ -118,7 +110,7 @@ function SeznamPravidel(props)
                 textAlign: 'center',
               }}>
                 <Button sx = {{m: 2, backgroundColor: '#196FCA'}} variant="contained" 
-           onClick={() => routeChangeToPravidlo} startIcon={<AddIcon />}>
+           onClick={() => routeChangeToPravidlo()} startIcon={<AddIcon />}>
             Nová sada pravidel
             </Button>
               </Container>
